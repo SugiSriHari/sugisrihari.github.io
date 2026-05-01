@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Srikanth Manimaran | Portfolio</title>
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #f6f7ff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --subtext: #475569;
+      --primary: #5a3dff;
+      --shadow: rgba(0, 0, 0, 0.12);
+      --line: rgba(0,0,0,0.15);
+    }
+
+    body.dark {
+      --bg: #0b1020;
+      --card: rgba(255, 255, 255, 0.06);
+      --text: #f1f5f9;
+      --subtext: #cbd5e1;
+      --primary: #7c5cff;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --line: rgba(255,255,255,0.15);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s;
+    }
+
+    /* NAVBAR */
+    nav {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      padding: 18px 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0px 4px 18px var(--shadow);
+      transition: 0.3s;
+    }
+
+    body.dark nav {
+      background: rgba(10, 15, 30, 0.75);
+    }
+
+    nav .logo {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      position: relative;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* TOGGLE */
+    .toggle {
+      width: 60px;
+      height: 30px;
+      background: #d1d5db;
+      border-radius: 30px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 4px;
+    }
+
+    .toggle span {
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      left: 5px;
+      transition: 0.3s;
+    }
+
+    body.dark .toggle {
+      background: #334155;
+    }
+
+    body.dark .toggle span {
+      left: 33px;
+      background: #facc15;
+    }
+    .toggle p {
+  position: absolute;
+  right: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+}
+
+body.dark .toggle p {
+  color: white;
+}
+
+    /* HERO */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 90px 70px;
+      gap: 40px;
+    }
+
+    .hero-text {
+      width: 55%;
+      animation: fadeIn 1s ease;
+    }
+
+    .hero-text h1 {
+      font-size: 62px;
+      font-weight: 900;
+      margin-bottom: 15px;
+      line-height: 1.1;
+    }
+
+    .hero-text h1 span {
+      color: var(--primary);
+    }
+
+    .typing {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--subtext);
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0px 10px 25px rgba(90, 61, 255, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    .hero-image {
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .hero-image img {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 10px solid rgba(90, 61, 255, 0.25);
+      box-shadow: 0px 12px 35px var(--shadow);
+      transition: 0.4s;
+    }
+
+    .hero-image img:hover {
+      transform: scale(1.03);
+    }
+
+    /* SECTION TITLE */
+    section {
+      padding: 35px 60px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .title h2 {
+      font-size: 42px;
+      font-weight: 900;
+      opacity: 0.08;
+      margin-bottom: -18px;
+    }
+
+    .title h3 {
+      font-size: 30px;
+      font-weight: 900;
+      
+      color: var(--text);
+    }
+
+    /* ABOUT */
+   .about-card-full {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  background: var(--card);
+  padding: 45px;
+  border-radius: 22px;
+  box-shadow: 0px 12px 30px var(--shadow);
+  border: 1px solid rgba(90, 61, 255, 0.15);
+  transition: 0.3s;
+}
+
+.about-card-full:hover {
+  transform: translateY(-6px);
+  border: 1px solid var(--primary);
+}
+
+.about-card-full h4 {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+
+.about-card-full p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--subtext);
+}
+    .bar {
+      width: 100%;
+      height: 8px;   /* smaller size */
+      background: rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 8px;   /* smaller size */
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    /* EDUCATION TIMELINE */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+      padding-left: 30px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--line);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 40px;
+    }
+
+    .timeline-icon {
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 35px;
+      height: 35px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0px 6px 15px rgba(90, 61, 255, 0.4);
+    }
+
+    .timeline-card {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0px 10px 30px var(--shadow);
+      transition: 0.3s;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .timeline-card h4 {
+      font-size: 20px;
+      color: var(--primary);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .timeline-card p {
+      color: var(--subtext);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .project {
+      background: var(--card);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0px 12px 30px var(--shadow);
+      transition: 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+    }
+
+    .project img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: 0.4s;
+    }
+
+    .project:hover img {
+      filter: brightness(1);
+      transform: scale(1.05);
+    }
+
+    .project-content {
+      padding: 22px;
+    }
+
+    .project-content h4 {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .project-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--subtext);
+      margin-bottom: 15px;
+    }
+
+    /* CONTACT */
+    .contact-box {
+      max-width: 650px;
+      margin: auto;
+      background: var(--card);
+      padding: 40px;
+      border-radius: 22px;
+      box-shadow: 0px 12px 30px var(--shadow);
+      text-align: center;
+    }
+
+    .contact-box p {
+      font-size: 15px;
+      margin-bottom: 18px;
+      color: var(--subtext);
+    }
+
+    .contact-box a {
+      color: var(--primary);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+      color: var(--subtext);
+    }
+
+    /* SCROLL TOP BUTTON */
+    #topBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 16px;
+      font-size: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0px 10px 25px rgba(90, 61, 255, 0.35);
+      transition: 0.3s;
+    }
+
+    #topBtn:hover {
+      transform: translateY(-4px);
+    }
+
+    /* ANIMATION */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0px); }
+    }
+
+    /* MOBILE */
+    @media(max-width: 900px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .hero-text, .hero-image {
+        width: 100%;
+      }
+
+      .hero-text h1 {
+        font-size: 42px;
+      }
+
+      .typing {
+        font-size: 18px;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-image img {
+        width: 270px;
+        height: 270px;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .about-container {
+        flex-direction: column;
+      }
+
+      .about-card, .skills {
+        width: 100%;
+      }
+    }
+    /* SKILL BAR ANIMATION */
+.fill {
+  width: 0;
+  transition: width 1.5s ease-in-out;
+}
+/* SKILLS CARD DESIGN */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--card);
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0px 12px 30px var(--shadow);
+  transition: 0.3s;
+  border: 1px solid rgba(90, 61, 255, 0.15);
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  border: 1px solid var(--primary);
+}
+
+.skill-card h4 {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.skill-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--subtext);
+}
+.btn-github {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0px 10px 25px rgba(90, 61, 255, 0.35);
+}
+
+.btn-github:hover {
+  transform: translateY(-4px);
+  background: #4025e6;
+}
+
+.btn-github img {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
+
+}
+.logo img {
+  width: 55px;
+  height: auto;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Srikanth M</div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+       <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+     
+    </ul>
+<div class="toggle" onclick="toggleDark()">
+  <span></span>
+  <p id="modeIcon">🌙</p>
+</div>
+  </nav>
+
+  <!-- HERO -->
+ <div class="hero" id="home">
+
+  <!-- HERO IMAGE (LEFT SIDE) -->
+  <div class="hero-image">
+    <img src="p.jpg" alt="Srikanth Profile">
+  </div>
+
+  <!-- HERO TEXT (RIGHT SIDE) -->
+  <div class="hero-text">
+    <h1>I Am <br> <span>Srikanth</span></h1>
+
+    <div class="typing" id="typing"></div>
+
+<p class="tagline">
+  🔥 Building fast, secure, and scalable web applications with Python & Django while delivering modern UI experiences.
+</p>
+
+<p>
+  Motivated Full Stack Developer skilled in Python, Django, HTML, CSS, SQL and JavaScript.
+  Passionate about building modern web applications and solving real-world problems.
+</p>
+
+    <div class="hero-buttons">
+      <a href="Resume_srikanth.pdf" download class="btn btn-primary">⬇ Download CV</a>
+    <a href="https://github.com/SugiSriHari" target="_blank" class="btn btn-github">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+  GitHub
+</a>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+  <div class="title">
+    <h2>ABOUT</h2>
+    <h3>About Me</h3>
+  </div>
+
+  <div class="about-card-full">
+    <h4>My Introduction</h4>
+
+    <p>
+      Hello! I’m <b>Srikanth Manimaran</b>, a highly motivated <b>Full Stack Developer (Fresher)</b> with strong
+      foundation in <b>Python</b> and backend development using <b>Django</b>. I am passionate about building scalable,
+      secure, and user-friendly web applications by combining backend logic with clean and responsive frontend design
+      using <b>HTML</b> and <b>CSS</b>. I also have working knowledge of <b>SQL</b> and basic <b>JavaScript</b> for dynamic
+      web functionality.
+    </p>
+
+    
+
+    
+    <br>
+
+    <p>
+      I am currently seeking an opportunity as a <b>Python Developer / Django Developer / Full Stack Developer</b>
+      where I can contribute to impactful projects, grow as a developer, and add value to the organization through
+      my technical skills, dedication, and ability to adapt to new challenges.
+    </p>
+
+
+  </div>
+</section>
+  <section id="skills">
+  <div class="title">
+    <h2>SKILLS</h2>
+    <h3>Technical Skills</h3>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <h4>🐍 Python</h4>
+      <p>Strong knowledge in Python programming, OOP concepts, and backend development.</p>
+    </div>
+
+    <div class="skill-card">
+      <h4>🌐 Django</h4>
+      <p>Experience in developing secure web applications using Django framework and ORM.</p>
+    </div>
+
+    <div class="skill-card">
+      <h4>🎨 HTML & CSS</h4>
+      <p>Skilled in responsive web design, layouts, and creating modern UI.</p>
+    </div>
+
+    <div class="skill-card">
+      <h4>🗄️ SQL</h4>
+      <p>Knowledge in database queries, joins, CRUD operations and database management.</p>
+    </div>
+
+    <div class="skill-card">
+      <h4>⚡ JavaScript</h4>
+      <p>Basic knowledge in JavaScript DOM manipulation and scripting.</p>
+    </div>
+
+    <div class="skill-card">
+      <h4>🔧 Git & GitHub</h4>
+      <p>Version control knowledge for managing and sharing projects.</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="title">
+      <h2>EDUCATION</h2>
+      <h3>Education</h3>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-icon">🎓</div>
+        <div class="timeline-card">
+          <h4>B.E - Computer Science Engineering</h4>
+          <p><b>Muthayammal Engineering College, Rasipuram</b></p>
+          <p>Aug 2020 - Apr 2024 | CGPA: 8.1</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-icon">📘</div>
+        <div class="timeline-card">
+          <h4>HSC</h4>
+          <p><b>Kongu Matric Hr.Sec School, Morappur</b></p>
+          <p>Jun 2019 - Mar 2020 | Percentage: 73%</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-icon">📗</div>
+        <div class="timeline-card">
+          <h4>SSLC</h4>
+          <p><b>Kongu Matric Hr.Sec School, Morappur</b></p>
+          <p>Jun 2017 - Apr 2018 | Percentage: 86%</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="title">
+      <h2>PROJECTS</h2>
+      <h3>My Projects</h3>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project">
+        <!-- <img src="food-ordering.jpg" alt="Food Ordering Project"> -->
+        <div class="project-content">
+          <h4>Food Ordering Website</h4>
+          <p>
+            Online food ordering system that allows customers to browse restaurants and order food easily.
+            Includes menu management and order tracking features.
+          </p>
+        </div>
+      </div>
+
+      <div class="project">
+        <!-- <img src="banking-system.jpg" alt="Banking Project"> -->
+        <div class="project-content">
+          <h4>Banking Management System</h4>
+          <p>
+            Secure banking management application for account creation, deposits, withdrawals and transfers.
+            Built with Django ORM and strong backend logic.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+  <div class="title">
+    <h2>CONTACT</h2>
+    <h3>Contact Me</h3>
+  </div>
+
+  <div class="contact-box">
+    <p>📧 <b>Email:</b> <a href="mailto:msrikanth0503@gmail.com">msrikanth0503@gmail.com</a></p>
+    <p>📞 <b>Phone:</b> <a href="tel:6379094856">6379094856</a></p>
+    <p>📍 <b>Location:</b> Dharmapuri, Tamil Nadu</p>
+    <p>💼 <b>LinkedIn:</b>
+      <a href="https://www.linkedin.com/in/srikanth-m-353a8026b" target="_blank">
+        linkedin.com/in/srikanth-m-353a8026b
+      </a>
+    </p>
+  </div>
+</section>
+
+  <footer>
+    © 2026 Srikanth Manimaran |  Portfolio Website
+  </footer>
+
+  <!-- SCROLL TOP BUTTON -->
+  <button onclick="scrollToTop()" id="topBtn">⬆</button>
+
+<script>
+  // DARK MODE TOGGLE
+  function toggleDark() {
+  document.body.classList.toggle("dark");
+
+  let icon = document.getElementById("modeIcon");
+  if (document.body.classList.contains("dark")) {
+    icon.innerHTML = "☀️";   // dark mode ON -> show sun for light mode
+  } else {
+    icon.innerHTML = "🌙";   // light mode ON -> show moon for dark mode
+  }
+}
+
+  // SCROLL TOP BUTTON SHOW
+  window.onscroll = function() {
+    let topBtn = document.getElementById("topBtn");
+    if (document.documentElement.scrollTop > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // TYPING EFFECT
+  const textArray = ["Full Stack Developer", "Python Developer", "Django Developer", "Web Developer"];
+  let typingElement = document.getElementById("typing");
+  let index = 0;
+  let charIndex = 0;
+  let currentText = "";
+  let isDeleting = false;
+
+  function typeEffect() {
+    currentText = textArray[index];
+
+    if (!isDeleting) {
+      typingElement.innerHTML = currentText.substring(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === currentText.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1000);
+        return;
+      }
+    } else {
+      typingElement.innerHTML = currentText.substring(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        index = (index + 1) % textArray.length;
+      }
+    }
+
+    setTimeout(typeEffect, isDeleting ? 60 : 120);
+  }
+
+  typeEffect();
+
+  // SKILL BAR ANIMATION ON SCROLL
+  const skillBars = document.querySelectorAll(".fill");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        bar.style.width = bar.getAttribute("data-percent");
+      }
+    });
+  }, { threshold: 0.5 });
+
+  skillBars.forEach(bar => observer.observe(bar));
+</script>
+
+</body>
+</html>
